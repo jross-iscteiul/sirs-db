@@ -38,7 +38,6 @@ module.exports.register = async server => {
             try{
                 const db = request.server.plugins.sql.client;
                 
-                const userId = "user1234";
                 if(db.trackers){
                 console.log("db: is real my trackers");}
                 else {

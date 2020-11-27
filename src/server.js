@@ -11,9 +11,12 @@ const app = async config =>{
 
     server.app.config = config;
 
+
     console.log("Servidor: "+ server)
     await plugins.register( server );
-    await routes.register( server );
+     await routes.register( server );
+     
+    
     return server;
 };
 module.exports = app;

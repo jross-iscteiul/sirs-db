@@ -11,6 +11,8 @@ const startServer = async () => {
         await app.start();
 
         console.log(`Server running in port ${config.port}`);
+        
+    
     }
     catch(err){
        console.log(err) ;
