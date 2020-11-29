@@ -22,6 +22,9 @@ const register = async ( {sql,getConnection}) => {
     const addMyTrackers = async (list) => {
         const cnx = await getConnection();
         const request = await cnx.request();
+        list = list.replace(/["]/g,"");
+        list = [['ola','amigos','ambiente'],["adeus","amigos","ambiente"]];
+        console.log(list);
         request.input("list",list)
         return await request.query(sqlQueries.addMyTrackers);
     }
