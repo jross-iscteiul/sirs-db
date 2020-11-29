@@ -1,3 +1,3 @@
 INSERT INTO [tracker-db].[dbo].[Trackers]
 ([trackerkey],[location],[date])
-VALUES ?
+VALUES ( @list )
