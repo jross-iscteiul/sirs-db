@@ -69,7 +69,8 @@ module.exports.register = async server => {
                 const list = request.payload.trackerlist;
                 
                 const res = await db.trackers.addMyTrackers(list);
-                return res.recordset;
+                console.log("ROWS AFFECTED: "+ res.rowsAffected );
+                return res.rowsAffected;
             }catch(err) {
                 console.log( err );
             }
