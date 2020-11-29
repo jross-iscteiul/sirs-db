@@ -23,12 +23,12 @@ const register = async ( {sql,getConnection}) => {
     const addMyTrackers = async (list) => {
         const cnx = await getConnection();
         const request = await cnx.request();
-        list = list.replace(/["]/g,"");
+      //  list = list.replace(/["]/g,"");
 let stmt = "INSERT INTO [dbo].[Trackers] ([trackerkey],[location],[date]) VALUES %L ";
         
-	list = [['ola','amigos','ambiente'],["adeus","amigos","ambiente"]];
+	//list = [['ola','amigos','ambiente'],["adeus","amigos","ambiente"]];
         console.log(list);
-        request.input("list",list)
+        //request.input("list",list)
 	console.log(format(stmt,list));       	
 	//request.query(format(stmt,list));
 

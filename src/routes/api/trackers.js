@@ -78,3 +78,4 @@ module.exports.register = async server => {
     });
     
 }
+
