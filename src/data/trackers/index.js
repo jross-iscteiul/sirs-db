@@ -12,7 +12,6 @@ const register = async ( {sql,getConnection}) => {
     };
 
     const getMyTrackers = async () => {
-        console.log("GET MY TRAQUERS REQUREST")
 
         const cnx = await getConnection();
         const request = await cnx.request();
@@ -20,9 +19,16 @@ const register = async ( {sql,getConnection}) => {
 
     };
 
+    const addMyTrackers = async (list) => {
+        const cnx = await getConnection();
+        const request = await cnx.request();
+        return await request.query(sqlQueries.addTrackers(list));
+    }
+
     return { 
         getTrackers,
-        getMyTrackers
+        getMyTrackers,
+        addMyTrackers
     };
 
 

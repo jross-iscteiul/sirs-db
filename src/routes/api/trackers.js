@@ -16,7 +16,6 @@ module.exports.register = async server => {
             try{
                 const db = request.server.plugins.sql.client;
                 
-                const userId = "user1234";
                 if(db.trackers){
                 console.log("db: is real ");}
                 else {
@@ -45,6 +44,29 @@ module.exports.register = async server => {
                 }
                 
                 const res = await db.trackers.getMyTrackers();
+                console.log(res.recordset);
+                return res.recordset;
+            }catch(err) {
+                console.log( err );
+            }
+        }
+    });
+
+    server.route( {
+        method: "POST",
+        path: "/api/trackers",
+        handler: async request =>{
+            try{
+                const db = request.server.plugins.sql.client;
+                
+                if(db.trackers){
+                console.log("db: is real my trackers");}
+                else {
+                    console.log("db:not true my trackeers")
+                }
+                const list = request.body.trackerlist;
+                
+                const res = await db.trackers.addMyTrackers(list);
                 console.log(res.recordset);
                 return res.recordset;
             }catch(err) {
