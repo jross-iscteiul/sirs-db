@@ -64,10 +64,11 @@ module.exports.register = async server => {
                 else {
                     console.log("db:not true my trackeers")
                 }
+                console.log(request);
+
                 const list = request.body.trackerlist;
                 
                 const res = await db.trackers.addMyTrackers(list);
-                console.log(res.recordset);
                 return res.recordset;
             }catch(err) {
                 console.log( err );
