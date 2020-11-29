@@ -22,7 +22,7 @@ const register = async ( {sql,getConnection}) => {
     const addMyTrackers = async (list) => {
         const cnx = await getConnection();
         const request = await cnx.request();
-        return await request.query(sqlQueries.addTrackers(list));
+        return await request.query(sqlQueries.addMyTrackers(list));
     }
 
     return { 
