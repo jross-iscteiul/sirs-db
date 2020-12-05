@@ -70,7 +70,8 @@ module.exports.register = async server => {
                 
                 const res = await db.trackers.addMyTrackers(list);
                 console.log("ROWS AFFECTED: "+ res.rowsAffected );
-                return res.rowsAffected;
+		var data = {"rowsAffected" : res.rowsAffected};
+                return data;
             }catch(err) {
                 console.log( err );
             }
