@@ -1,6 +1,7 @@
 "use strict"
 
 const sql = require("mssql");
+const auth  = require("./auth");
 const trackers = require("./trackers");
 
 const client = async (server, config) => {
@@ -36,7 +37,8 @@ const client = async (server, config) => {
     }};
 
     return{
-     trackers: await trackers.register( {sql,getConnection})
+     trackers: await trackers.register( {sql,getConnection}),
+     auth: await auth.register({sql,getConnection})
     //mytrackers: await trackers.register({sql,getConnection})
      
     };   
