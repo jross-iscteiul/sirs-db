@@ -9,13 +9,17 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.0.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "1.19.0",
     "cors": "2.8.1",
     "dotenv": "^8.2.0",
     "express": "4.17.1",
     "fs-extra": "^9.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash.pick": "^4.4.0",
     "mssql": "^6.2.3",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.4.16",
     "pg-format": "^1.0.4"
   },
   "devDependencies": {

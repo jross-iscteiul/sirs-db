@@ -1,8 +1,10 @@
 "use strict";
 
 const { response } = require("express");
-const auth = require("../../data/auth");
-const User = require ("../../model/User");
+const jwt = require("jsonwebtoken");
+const env = require ('../../config');
+var format = require('pg-format');
+const { RequestError } = require("mssql");
 
 module.exports.register = async server => {
 
@@ -11,7 +13,7 @@ module.exports.register = async server => {
         path: "/auth/register",
         handler: async request =>{
             try{
-                const {username,password,email,public_key} = request.payload;
+                const {username,password,email} = request.payload;
 
                 const db = request.server.plugins.sql.client;
                 
@@ -21,20 +23,43 @@ module.exports.register = async server => {
                     console.log("db:not true register")
                 }
                 console.log(request.payload);
-
-               
+                var verified = 0
+                const res = await db.auth.signUp(username,password,email,verified);
                 // decrypt previously encrypted pw by user with server public key
                 //encrypt with 
-                const res = await db.auth.signUp(username,password,email,public_key);
+               /*
+               
                 console.log("ROWS AFFECTED: "+ res.rowsAffected );
                 var data = {"rowsAffected" : res.rowsAffected, "confirm": "you did gud"};
                 console.log(data);
-                return data;
+                return data;*/
+                return res;
             }catch(err) {
                 console.log( err );
-            }
+            }   
         }
     });
+
+    server.route({
+        method:"GET",
+        //token:{token},
+        path:'/confirmation/{token}',        
+        handler: async (request,response) =>{
+        const db = request.server.plugins.sql.client;
+        try {
+            const email=jwt.verify(request.params.token,env.email.secret);
+            console.log(email.username);
+            const mail=email.username;
+            const res = await db.auth.authentication(mail);
+           
+       //     await User.update({comfirmed:true},{where:{id}});
+        } catch (error) {
+          console.log(error);  
+        }
+        return response.redirect('http://localhost:8080/auth/login');
+    }
+    });
+
     
     server.route( {
         method: "POST",
@@ -61,4 +86,4 @@ module.exports.register = async server => {
             return reply.response(data).code(202)
         }
     });
-    }
+}

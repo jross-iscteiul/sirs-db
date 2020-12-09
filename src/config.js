@@ -16,7 +16,10 @@ const {
     SQL_PASSWORD,
     OKTA_ORG_URL,
     OKTA_CLIENT_ID,
-    OKTA_CLIENT_SECRET
+    OKTA_CLIENT_SECRET,
+    EMAIL_SECRET ,
+    EMAIL_USER ,
+    EMAIL_PASS ,
 } = process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
@@ -42,5 +45,10 @@ module.exports = {
         url: OKTA_ORG_URL,
         clientId : OKTA_CLIENT_ID,
         clientSecret : OKTA_CLIENT_SECRET
+    },
+    email:{
+        secret:EMAIL_SECRET,
+        user:EMAIL_USER,
+        pass:EMAIL_PASS,
     }
 }
