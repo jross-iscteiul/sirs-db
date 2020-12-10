@@ -50,5 +50,5 @@ module.exports = {
         secret:EMAIL_SECRET,
         user:EMAIL_USER,
         pass:EMAIL_PASS,
-    }
+    },
 }
