@@ -22,16 +22,15 @@ class UserController {
     const { email, password, phone_number } = data;
 
     /* console.log(this.CheckPassword(password)); */
-    const passRules = new RegExp(
-      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])^[A-Za-z0-9 ]+$/
-    );
-    if (!passRules.test(password)) {
+    const passRules2 = new RegExp(/^[a-zA-Z0-9]{10,}$/);
+    const passRules = new RegExp(/^(?!.*[\s])(?=.*[A-Z])(?=.*\d)/);
+    if (!passRules.test(password) || !passRules2.test(password)) {
       return res
         .status(400)
         .json({ error: "Invalid Password check your params" });
     }
 
-    const phoneRules = new RegExp(/^([0-9]{9})/);
+    const phoneRules = new RegExp(/^([0-9]{9}$)/);
     if (!phoneRules.test(phone_number)) {
       return res
         .status(400)
