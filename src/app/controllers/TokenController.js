@@ -29,10 +29,10 @@ class TokenController {
         }
       );
     } else {
-      return res.status(401).json({ error: "Invalid Credencials" });
+      return res.json({code:1, error: "Invalid Credencials" });
     }
 
-    return res.status(200).json({ Success: "A email was sent" });
+    return res.json({code:0, Success: "A email was sent" });
   }
 }
 

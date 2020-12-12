@@ -10,17 +10,21 @@ class TrackerController {
     return res.json(trackers);
   }
 
-  async store(req, res) {
+  async store(req, res) { 
+   // console.log(entrou);
     const { trackerlist, token, phone_number } = req.body;
+    var payload=null;
+try{
+   payload = jwt.verify(token, process.env.EMAIL_SECRET);
 
-    const payload = jwt.verify(token, process.env.EMAIL_SECRET);
-
-    console.log("payload: " + payload.phone_number);
-    console.log("phone_number: " + phone_number);
+console.log("payload:"+payload.phone_number)
+console.log("ph:" + phone_number)
     if (payload.phone_number != phone_number) {
-      return res.statu(401).json({ error: "invalid token" });
+      return res.json({code:1, error: "invalid token" });
     }
-
+  }catch(err){
+    return res.json({code:1, error: "invalid token sdd" });
+  }
     await User.update(
       { positive: true },
       { where: { phone_number: phone_number } }
@@ -37,7 +41,8 @@ class TrackerController {
 
       await Tracker.create(tracker);
     });
-    return res.status(200).json({});
+    console.log("Bom trabalho!")
+    return res.json({code:0});
   }
 }
 

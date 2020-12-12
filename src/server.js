@@ -13,8 +13,8 @@ const options = {
 /* var httpServer = http.createServer(app); */
 const server = https.createServer(options, app);
 
-server.listen(3000, () => {
-  console.log("server starting on port : " + 3000);
+server.listen(8080,'0.0.0.0', () => {
+  console.log("server starting on port : " + 8080);
 });
 
 //teste

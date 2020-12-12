@@ -26,15 +26,13 @@ class UserController {
     const passRules = new RegExp(/^(?!.*[\s])(?=.*[A-Z])(?=.*\d)/);
     if (!passRules.test(password) || !passRules2.test(password)) {
       return res
-        .status(400)
-        .json({ error: "Invalid Password check your params" });
+        .json({code:1, error: "Invalid Password check your params" });
     }
 
     const phoneRules = new RegExp(/^([0-9]{9}$)/);
     if (!phoneRules.test(phone_number)) {
       return res
-        .status(400)
-        .json({ error: "Invalid PhoneNumber check your params" });
+        .json({code:1, error: "Invalid PhoneNumber check your params" });
     }
 
     const userExists = await User.findOne({ where: { email: email } });
@@ -43,7 +41,7 @@ class UserController {
     });
 
     if (userExists || userPhoneExists) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.json({code:1, error: "User already exists" });
     }
 
     const { id } = await User.create({
@@ -53,7 +51,7 @@ class UserController {
     });
 
     jwt.sign({ id }, auth.emailSecret, { expiresIn: "1d" }, (err, token) => {
-      const url = `http://localhost:8080/confirmEmail/${token}`; //atualizar para pagina do front quando tiver feita
+      const url = `https://ec2-3-10-150-239.eu-west-2.compute.amazonaws.com:8080/confirmEmail/${token}`; 
       Mail.sendMail({
         to: email,
         subject: "Confirm Your Account",
@@ -75,10 +73,10 @@ class UserController {
       );
       await User.update({ verified: true }, { where: { id } });
     } catch (e) {
-      return res.status(401).json({ error: "Could not verify your email!" });
+      return res.json({code:1, error: "Could not verify your email!" });
     }
 
-    return res.status(200).json({ success: "Your Email has been Confirmed!" });
+    return res.json({code:0, success: "Your Email has been Confirmed!" });
   }
 }
 

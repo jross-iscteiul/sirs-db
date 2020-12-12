@@ -12,29 +12,27 @@ class SessionController {
     
     if (!passRules.test(password) || !passRules2.test(password)) {
       return res
-        .status(401)
-        .json({ error: "Invalid Password check your params" });
+        .json({code:1, error: "Invalid Password check your params" });
     }
 
     const phoneRules = new RegExp(/^([0-9]{9}$)/);
     if (!phoneRules.test(phone_number)) {
       return res
-        .status(401)
-        .json({ error: "Invalid PhoneNumber check your params" });
+        .json({code:0, error: "Invalid PhoneNumber check your params" });
     }
 
     const user = await User.findOne({ where: { phone_number } });
 
     if (!user) {
-      return res.status(401).json({ error: "User not found" });
+      return res.json({code:1, error: "User not found" });
     }
 
     if (!(await user.checkPassword(password))) {
-      return res.status(401).json({ error: "Password does not match" });
+      return res.json({code:1, error: "Password does not match" });
     }
 
     if (!user.verified) {
-      return res.status(401).json({ error: "Email not confirmed" });
+      return res.json({code:1,error: "Email not confirmed" });
     }
 
     const { id } = user;
