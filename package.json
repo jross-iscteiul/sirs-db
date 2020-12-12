@@ -1,36 +1,27 @@
 {
-  "name": "sirs",
+  "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "dependencies": {
-    "@hapi/hapi": "^20.0.3",
-    "@types/escape-string-regexp": "^2.0.1",
-    "bcrypt": "^5.0.0",
-    "body-parser": "1.19.0",
-    "cors": "2.8.1",
+    "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
-    "express": "4.17.1",
-    "fs": "0.0.1-security",
-    "fs-extra": "^9.0.1",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash.pick": "^4.4.0",
-    "mssql": "^6.2.3",
-    "mysql": "^2.18.1",
-    "node-rsa": "^1.1.1",
-    "nodemailer": "^6.4.16",
-    "pg-format": "^1.0.4"
+    "nodemailer": "^6.4.11",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
   },
   "devDependencies": {
-    "eslint": "^7.14.0",
-    "eslint-config-reverentgeek": "^3.1.1",
-    "nodemon": "^2.0.6"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
 }
